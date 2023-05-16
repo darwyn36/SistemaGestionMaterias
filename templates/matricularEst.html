@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Administrador</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+	<header>
+		<nav>
+			<ul>
+				<li><a href="#">Lista de Carrera</a></li>
+				<li><a href="#">Lista de Estudiantes</a></li>
+				<li><a href="#">Registrar Nueva Carrera</a></li>
+			</ul>
+		</nav>
+	</header>
+
+<body>
+	<h1>Matrícula de Estudiantes</h1>
+
+    <label for="estudiantes">Seleccionar Estudiante:</label>
+    <select id="estudiantes">
+        <option value="" selected disabled>Seleccione un estudiante</option>
+    </select>
+
+    <button id="matricular">Matricular Estudiante</button>
+
+    <script>
+        // Cargar los estudiantes en el selector al cargar la página
+        window.addEventListener('DOMContentLoaded', (event) => {
+            fetch('/estudiantes')
+                .then(response => response.json())
+                .then(data => {
+                    const select = document.getElementById('estudiantes');
+                    data.forEach(estudiante => {
+                        const option = document.createElement('option');
+                        option.value = estudiante.codigo_sis;
+                        option.textContent = `${estudiante.nombre} ${estudiante.apellido}`;
+                        select.appendChild(option);
+                    });
+                });
+        });
+
+        // Manejar el evento de clic en el botón "Matricular Estudiante"
+        const matricularButton = document.getElementById('matricular');
+        matricularButton.addEventListener('click', () => {
+            const selectedCodigoSis = document.getElementById('estudiantes').value;
+            if (selectedCodigoSis) {
+                fetch('/matricular', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ codigo_sis: selectedCodigoSis })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            }
+        });
+    </script>
+</body>
+</html>

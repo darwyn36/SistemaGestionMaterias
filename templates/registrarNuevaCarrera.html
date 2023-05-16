@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Administrador</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+	<header>
+		<nav>
+			<ul>
+				<li><a href="#">Lista de Carrera</a></li>
+				<li><a href="#">Lista de Estudiantes</a></li>
+				<li><a href="/registrarNuevaCarrera">Registrar Nueva Carrera</a></li>
+			</ul>
+		</nav>
+	</header>
+
+</body>
+<body>
+  <div class="container">
+    <h1>Registrar una nueva carrera</h1>
+    <form action="/registrar_carrera" method="POST">
+      <label for="nombre">Nombre de la carrera:</label>
+      <input type="text" id="nombre" name="nombre" required>
+
+      <label for="codigo">Código SIS:</label>
+      <input type="text" id="codigo" name="codigo" readonly>
+
+      <button type="button" onclick="generarCodigo()">Generar Código</button>
+      <button type="submit">Registrar Carrera</button>
+    </form>
+  </div>
+
+  <script>
+    function generarCodigo() {
+      var fecha = new Date();
+      var codigo = fecha.getFullYear() + ("0" + (fecha.getMonth() + 1)).slice(-2);
+      document.getElementById("codigo").value = codigo;
+    }
+  </script>
+</body>
+</html>

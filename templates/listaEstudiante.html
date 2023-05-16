@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Administrador</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/listaCarrera">Lista de Carrera</a></li>
+                <li><a href="/listaEstudiante">Lista de Estudiante</a></li>
+                <li><a href="/listaDocente">Lista de Docente</a></li>
+                <li><a href="/registrarNuevaCarrera">Registrar Carrera Nueva</a></li>
+            </ul>
+        </nav>
+    </header>
+</head>
+<h1>Tabla de Estudiantes</h1>
+
+  {% if estudiantes %}
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Código Sis</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for estudiante in estudiantes %}
+      <tr>
+        <td>{{ estudiante[0] }}</td>
+        <td>{{ estudiante[1] }}</td>
+        <td>{{ estudiante[2] }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="mensaje-centralizado">{{ mensaje }}</p>
+  {% endif %}
+
+<style>
+    table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table th, table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.mensaje-centralizado {
+  text-align: center;
+}
+
+</style>
+</body>
+</html>

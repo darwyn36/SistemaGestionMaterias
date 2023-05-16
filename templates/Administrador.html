@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Administrador</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/listaCarrera">Lista de Carrera</a></li>
+                <li><a href="/listaEstudiante">Lista de Estudiante</a></li>
+                <li><a href="/listaDocente">Lista de Docente</a></li>
+                <li><a href="/registrarNuevaCarrera">Registrar Carrera Nueva</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section>
+        <form method="post" onsubmit="return validarFecha()" action="/insertar_semestre">
+    <h2>Iniciar y finalizar el semestre</h2>
+            {% if fecha_fin %}
+             <p>Fecha de finalización actual: {{ fecha_fin }}</p>
+            {% endif %}
+
+    <label for="fechaInicio">Fecha de inicio:</label>
+    <input type="date" id="fechaInicio" name="fechaInicio"><br><br>
+
+    <label for="fechaFin">Fecha de finalización:</label>
+    <input type="date" id="fechaFin" name="fechaFin"><br><br>
+
+    <input type="submit" id="botonSemestre" value="Iniciar/terminar semestre" disabled>
+  </form>
+
+
+    <script>
+    function validarFecha() {
+      var fechaInicio = document.getElementById("fechaInicio").value;
+      var fechaFin = document.getElementById("fechaFin").value;
+
+      if (fechaInicio > fechaFin) {
+        alert("La fecha de finalización debe ser posterior a la fecha de inicio");
+        return false;
+      }
+      return true;
+    }
+
+     window.onload = function() {
+      var fechaFinSemestre = "{{ fecha_fin_semestre }}";
+      var botonSemestre = document.getElementById("botonSemestre");
+
+      setInterval(function() {
+        var fechaActual = new Date().toISOString().split('T')[0];
+        if (fechaActual >= fechaFinSemestre) {
+          botonSemestre.disabled = true;
+          botonSemestre.value = "Fin de semestre alcanzado";
+        }
+      }, 1000);
+    }
+
+    var urlParams = new URLSearchParams(window.location.search);
+    var mensajeExito = urlParams.get('exito');
+    if (mensajeExito === "true") {
+      alert("¡Semestre registrado con éxito!");
+    }
+
+  </script>
+        <div class="form-container">
+            <h2>Matricular Estudiante</h2>
+            <p>Haz clic para matricular estudiantes:</p>
+            <a href="/matricularEst" class="matricular-btn">Matricular Estudiantes</a>
+        </div>
+    </section>
+
+
+</body>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #f2f2f2;
+    padding: 10px;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 10px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+.form-container {
+    text-align: center;
+    margin: 20px;
+}
+
+.form-container h2 {
+    margin-bottom: 10px;
+}
+
+.matricular-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.matricular-btn:hover {
+    background-color: #0056b3;
+}
+
+</style>
+</html>

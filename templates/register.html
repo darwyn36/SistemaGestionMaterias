@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Menú</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+	<header>
+		<nav>
+			<ul>
+				<li><a href="/index">Inicio</a></li>
+				<li><a href="#">Servicios</a></li>
+				<li><a href="#">Contacto</a></li>
+				<li><a href="/loginD">Docentes</a></li>
+				<li><a href="/loginE">Estudiantes</a></li>
+				<li><a href="/register">Registrar</a></li>
+			</ul>
+		</nav>
+	</header>
+<!-- Formulario de registro-->
+<head>
+	<title>Registro de Usuario</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<div class="container">
+		<h1>Registro de Usuario</h1>
+		<form action="/register" method="POST">
+			<label for="nombre">Nombre completo:</label>
+			<input type="text" id="nombre" name="nombre" required>
+
+			<label for="apellido">Apellido completo:</label>
+			<input type="text" id="apellido" name="apellido" required>
+
+			<label for="ci">Carnet de Identidad:</label>
+			<input type="text" id="ci" name="ci" required>
+
+			<label for="codigo_sis">Código Sis:</label>
+  			<input type="text" id="codigo_sis" name="codigo_sis" readonly>
+  			<button type="button" onclick="generarCodigo()">Generar código</button>
+
+			<script>
+				function generarCodigo() {
+				  var today = new Date();
+				  var year = today.getFullYear().toString().substr(-2);
+				  var month = (today.getMonth() + 1).toString().padStart(2, '0');
+				  var day = today.getDate().toString().padStart(2, '0');
+				  var codigo_sis = year + month + day + Math.floor(Math.random() * 100).toString().padStart(2, '0');
+				  document.getElementById("codigo_sis").value = codigo_sis;
+				}
+
+			</script>
+
+			<label for="fecha_nacimiento">Fecha de Nacimiento</label>
+			<input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required>
+
+			  <label for="tipo_usuario">Tipo de Usuario:</label>
+				  <select id="tipo_usuario" name="tipo_usuario">
+					<option value="docente">Docente</option>
+					<option value="estudiante">Estudiante</option>
+				  </select><br>
+			<label>
+
+			</label>
+			<button type="submit" onclick="mostrarAlerta()">Registrarse</button>
+    		</form>
+
+							<script>
+								function mostrarAlerta() {
+							  alert("Fue creado exitosamente!");
+							}
+							</script>
+
+	</div>
+</body>
+<!-- Fin Formulario -->
+</body>
+</html>

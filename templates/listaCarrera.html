@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Administrador</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/listaCarrera">Lista de Carrera</a></li>
+                <li><a href="/listaEstudiante">Lista de Estudiante</a></li>
+                <li><a href="/listaDocente">Lista de Docente</a></li>
+                <li><a href="/registrarNuevaCarrera">Registrar Carrera Nueva</a></li>
+            </ul>
+        </nav>
+    </header>
+</head>
+<style>
+        table {
+			border-collapse: collapse;
+			width: 100%;
+		}
+		th, td {
+			text-align: left;
+			padding: 8px;
+			border-bottom: 1px solid #ddd;
+		}
+		tr:hover {background-color: #f5f5f5;}
+    </style>
+<body>
+	<h1>Lista de Carreras</h1>
+	{% if carreras %}
+		<table>
+			<tr>
+				<th>Nombre de Carrera</th>
+				<th>Código SIS</th>
+			</tr>
+			{% for carrera in carreras %}
+				<tr>
+					<td>{{ carrera[0] }}</td>
+					<td>{{ carrera[1] }}</td>
+				</tr>
+			{% endfor %}
+		</table>
+	{% else %}
+		<p>No existen carreras aún.</p>
+	{% endif %}
+</body>
+</body>
+</html>

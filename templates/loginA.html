@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Menú</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+	<header>
+		<nav>
+			<ul>
+				<li><a href="#">Inicio</a></li>
+				<li><a href="#">Servicios</a></li>
+				<li><a href="#">Contacto</a></li>
+				<li><a href="/loginD">Docentes</a></li>
+				<li><a href="/loginE">Estudiantes</a></li>
+				<li><a href="/register">Registrar</a></li>
+			</ul>
+		</nav>
+	</header>
+<!-- Formulario de registro Estudiante-->
+<head>
+	<meta charset="utf-8">
+	<title>Iniciar Sesión Administrador</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+	<main>
+		<form method="POST" action="/loginA">
+			<div class="formulario">
+				<h2>Iniciar sesión Administrador </h2>
+				<label for="nombre" >Usuario: </label>
+				<input type="password" id="nombre" name="nombre" pattern="^[A-Za-z0-9]+$" required>
+
+                <label for="apellido">Contraseña:</label>
+				<input type="password" id="apellido" name="apellido" pattern="^[A-Za-z0-9]+$" required>
+				<input type="submit" value="Ingresar">
+			</div>
+		</form>
+	</main>
+</body>
+<!-- Fin Formulario -->
+</body>
+</html>
